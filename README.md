@@ -54,3 +54,25 @@ Then sign out and sign back in.
 
 ## Notes
 This is a practical educational starter, not a security-audited production system. Add HTTPS, rate limiting, backups, stricter role permissions and deployment secrets before production use.
+
+## Jenkins CI Automation
+
+- Set up Jenkins for the Inventory Stock Management System.
+- Connected Jenkins to the GitHub repository.
+- Created a `Jenkinsfile` to define pipeline stages.
+- Automated backend and frontend dependency installation.
+- Configured the frontend build using Vite.
+- Enabled Poll SCM to check GitHub for new code changes.
+- Jenkins reports build success or failure.
+
+### Tools Used
+- Jenkins
+- Git and GitHub
+- Node.js
+- Vite
+- MySQL
+
+### Future Improvements
+- Add automated testing.
+- Integrate Docker.
+- Deploy the application using Kubernetes if required.
