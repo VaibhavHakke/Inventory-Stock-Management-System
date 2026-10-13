@@ -13,6 +13,12 @@ pipeline {
             }
         }
 
+        stage('Check Docker') {
+            steps {
+                bat 'docker info'
+            }
+        }
+
         stage('Backend Dependencies') {
             steps {
                 dir('backend') {
@@ -29,14 +35,6 @@ pipeline {
             }
         }
 
-        stage('Backend Build Check') {
-            steps {
-                dir('backend') {
-                    bat 'npm run'
-                }
-            }
-        }
-
         stage('Frontend Build') {
             steps {
                 dir('frontend') {
@@ -44,14 +42,26 @@ pipeline {
                 }
             }
         }
+
+        stage('Build Backend Docker Image') {
+            steps {
+                bat 'docker build -t inventory-backend:latest -f backend\\Dockerfile backend'
+            }
+        }
+
+        stage('Build Frontend Docker Image') {
+            steps {
+                bat 'docker build -t inventory-frontend:latest -f frontend\\Dockerfile frontend'
+            }
+        }
     }
 
     post {
         success {
-            echo 'CI pipeline completed successfully.'
+            echo 'CI pipeline completed successfully. Docker images built.'
         }
         failure {
-            echo 'Pipeline failed. Check the Console Output.'
+            echo 'Pipeline failed. Check Console Output.'
         }
         always {
             echo 'Pipeline execution finished.'
